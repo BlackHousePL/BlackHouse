@@ -237,7 +237,7 @@
             switchVersion();
         });
 
-        // Funkcja do sprawdzania, czy strona jest wyświetlana na urządzeniu mobilnym
+        // Funkcja sprawdzająca, czy strona jest wyświetlana na urządzeniu mobilnym
         function isMobile() {
             return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         }
@@ -246,6 +246,58 @@
         if (!isMobile()) {
             document.getElementById('switchVersion').style.display = 'none';
         }
+
+        // Funkcja wczytująca ogłoszenia
+        async function loadAnnouncements() {
+            try {
+                const response = await fetch('ogloszenia.txt');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const text = await response.text();
+
+                // Zamienia \n na <br> w tekście
+                let formattedText = text.replace(/\n/g, '<br>');
+
+                // Zamienia <pogrubienie>...</pogrubienie> na <strong>...</strong>
+                formattedText = formattedText.replace(/<pogrubienie>(.*?)<\/pogrubienie>/gs, '<strong>$1</strong>');
+
+                document.getElementById('announcements').innerHTML = formattedText;
+            } catch (error) {
+                document.getElementById('announcements').textContent = 'Nie udało się załadować ogłoszeń: ' + error.message;
+                console.error('Fetch error:', error);
+            }
+        }
+
+        // Inicjalizacja ładowania ogłoszeń po załadowaniu struktury DOM
+        document.addEventListener('DOMContentLoaded', function () {
+            loadAnnouncements();
+
+            const tabLinks = document.querySelectorAll('.tab-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabLinks.forEach(function (link) {
+                link.addEventListener('click', function () {
+                    const tabId = this.getAttribute('data-tab');
+
+                    tabContents.forEach(function (content) {
+                        if (content.id === tabId) {
+                            content.classList.add('active');
+                        } else {
+                            content.classList.remove('active');
+                        }
+                    });
+
+                    tabLinks.forEach(function (link) {
+                        if (link.getAttribute('data-tab') === tabId) {
+                            link.classList.add('active');
+                        } else {
+                            link.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        });
     </script>
 </body>
 
