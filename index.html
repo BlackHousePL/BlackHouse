@@ -24,7 +24,7 @@
         header h1 {
             margin: 0;
             font-size: 3em;
-            color: #ffffff; /* Biały tekst */
+            color: #000000; /* Czarny tekst */
         }
 
         header p {
@@ -132,11 +132,19 @@
 
         @media (max-width: 768px) {
             header h1 {
-                font-size: 2.5em;
+                font-size: 2em; /* Zmniejszenie rozmiaru czcionki dla nagłówka */
             }
 
             .section {
                 padding: 15px;
+            }
+
+            .tabs li {
+                padding: 8px 16px; /* Zmniejszenie paddingu dla elementów tabów */
+            }
+
+            .button {
+                padding: 8px 16px; /* Zmniejszenie paddingu dla przycisków */
             }
         }
     </style>
@@ -145,7 +153,7 @@
 
 <body>
     <header>
-        <h1 style="color: #000000;">Black House</h1>
+        <h1>Black House</h1>
         <p></p>
     </header>
     <div class="content">
@@ -190,7 +198,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2024 Black House. Wszelkie prawa zastrzeżone. Projekt i realizacja: Z1emniakPL.</p>
+        <p>&copy; 2024 Black House. Wszelkie prawa zastrzeżone. Projekt i realizacja: TwójNick.</p>
     </footer>
 
     <script>
