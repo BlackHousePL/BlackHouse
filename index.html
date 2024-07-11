@@ -145,18 +145,12 @@
     <script>
         async function loadAnnouncements() {
             try {
-                const response = await fetch('ogloszenia.txt'); // lub 'ogloszenia.md'
+                const response = await fetch('ogloszenia.md');
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const text = await response.text();
-                // Renderowanie Markdown tylko jeśli plik ma rozszerzenie .md
-                const announcementsContainer = document.getElementById('announcements');
-                if (response.url.endsWith('.md')) {
-                    announcementsContainer.innerHTML = marked(text);
-                } else {
-                    announcementsContainer.textContent = text;
-                }
+                document.getElementById('announcements').innerHTML = marked(text);
             } catch (error) {
                 document.getElementById('announcements').innerHTML = 'Nie udało się załadować ogłoszeń.';
                 console.error('Fetch error:', error);
