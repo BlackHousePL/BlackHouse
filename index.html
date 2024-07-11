@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,30 +12,25 @@
             margin: 0;
             padding: 0;
         }
-
         header {
             background-color: #1f1f1f;
             padding: 20px 0;
             text-align: center;
             border-bottom: 2px solid #444444;
         }
-
         header h1 {
             margin: 0;
             font-size: 3em;
             color: #7289da;
         }
-
         header p {
             font-size: 1.2em;
         }
-
         .content {
             max-width: 1200px;
             margin: 20px auto;
             padding: 0 20px;
         }
-
         .section {
             background-color: #333333;
             border-radius: 8px;
@@ -44,17 +38,14 @@
             margin-bottom: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-
         .section h2 {
             color: #61dafb;
             border-bottom: 2px solid #61dafb;
             padding-bottom: 10px;
         }
-
         .section p {
             line-height: 1.6;
         }
-
         .button {
             display: inline-block;
             background-color: #7289da;
@@ -65,11 +56,9 @@
             transition: background-color 0.3s ease;
             margin-top: 10px;
         }
-
         .button:hover {
             background-color: #5b6eae;
         }
-
         .announcements {
             background-color: #1f1f1f;
             border-left: 5px solid #61dafb;
@@ -78,7 +67,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             border-radius: 8px;
         }
-
         .tab {
             display: inline-block;
             margin-right: 10px;
@@ -89,44 +77,36 @@
             border-radius: 5px 5px 0 0;
             border: 1px solid #444444;
         }
-
         .tab:hover {
             background-color: #444444;
         }
-
         .tab-content {
             display: none;
         }
-
         .tab-content.active {
             display: block;
         }
-
         footer {
             background-color: #1f1f1f;
             text-align: center;
             padding: 20px;
             border-top: 2px solid #444444;
         }
-
         footer p {
             margin: 0;
             font-size: 0.9em;
             color: #cccccc;
         }
-
         @media (max-width: 768px) {
             header h1 {
                 font-size: 2.5em;
             }
-
             .section {
                 padding: 15px;
             }
         }
     </style>
 </head>
-
 <body>
     <header>
         <h1>Black House</h1>
@@ -138,15 +118,13 @@
             <div class="tab" onclick="openTab('minecraft')">Minecraft</div>
             <div id="discord" class="tab-content active">
                 <h2>Dołącz do nas na Discordzie</h2>
-                <p>Dołącz do naszej społeczności na Discordzie, aby być na bieżąco z wydarzeniami, znajdować nowych
-                    przyjaciół do gry i korzystać z różnych kanałów tematycznych.</p>
+                <p>Dołącz do naszej społeczności na Discordzie, aby być na bieżąco z wydarzeniami, znajdować nowych przyjaciół do gry i korzystać z różnych kanałów tematycznych.</p>
                 <a href="https://discord.gg/twoj-link" class="button">Dołącz do Discorda</a>
             </div>
             <div id="minecraft" class="tab-content">
                 <h2>Minecraft</h2>
                 <p>Premiera: Nieznana</p>
-                <p>Serwer Minecraft Black House jest obecnie w fazie rozwoju. Będziemy informować o dacie premiery na
-                    naszym Discordzie.</p>
+                <p>Serwer Minecraft Black House jest obecnie w fazie rozwoju. Będziemy informować o dacie premiery na naszym Discordzie.</p>
             </div>
         </div>
         <div class="section">
@@ -157,8 +135,7 @@
         </div>
         <div class="section">
             <h2>O nas</h2>
-            <p>Black House to społeczność graczy, którzy łączą się na naszym serwerze Discord, aby wspólnie grać,
-                rozmawiać i bawić się.</p>
+            <p>Black House to społeczność graczy, którzy łączą się na naszym serwerze Discord, aby wspólnie grać, rozmawiać i bawić się.</p>
         </div>
     </div>
     <footer>
@@ -168,12 +145,18 @@
     <script>
         async function loadAnnouncements() {
             try {
-                const response = await fetch('ogloszenia.md');
+                const response = await fetch('ogloszenia.txt'); // lub 'ogloszenia.md'
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const text = await response.text();
-                document.getElementById('announcements').innerHTML = marked(text);
+                // Renderowanie Markdown tylko jeśli plik ma rozszerzenie .md
+                const announcementsContainer = document.getElementById('announcements');
+                if (response.url.endsWith('.md')) {
+                    announcementsContainer.innerHTML = marked(text);
+                } else {
+                    announcementsContainer.textContent = text;
+                }
             } catch (error) {
                 document.getElementById('announcements').innerHTML = 'Nie udało się załadować ogłoszeń.';
                 console.error('Fetch error:', error);
@@ -193,5 +176,4 @@
         }
     </script>
 </body>
-
 </html>
