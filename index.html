@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Black House - Discord</title>
     <style>
+        /* Styl globalny */
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #1e1e1e; /* Głęboki czarny */
@@ -14,11 +15,13 @@
             padding: 0;
         }
 
+        /* Nagłówek */
         header {
             background-color: #2c2c2c; /* Ciemny szary */
             padding: 20px 0;
             text-align: center;
             border-bottom: 2px solid #7289da; /* Jasny niebieski */
+            position: relative; /* Względem pozycji */
         }
 
         header h1 {
@@ -31,12 +34,14 @@
             font-size: 1.2em;
         }
 
+        /* Treść */
         .content {
             max-width: 1200px;
             margin: 20px auto;
             padding: 0 20px;
         }
 
+        /* Sekcja */
         .section {
             background-color: #333333; /* Ciemny szary */
             border-radius: 8px;
@@ -55,6 +60,7 @@
             line-height: 1.6;
         }
 
+        /* Przycisk */
         .button {
             display: inline-block;
             background-color: #7289da; /* Jasny niebieski */
@@ -70,6 +76,7 @@
             background-color: #5b6eae; /* Ciemniejszy odcień niebieskiego */
         }
 
+        /* Ogłoszenia */
         .announcements {
             background-color: #333333; /* Ciemny szary */
             border-left: 5px solid #7289da; /* Jasny niebieski */
@@ -80,6 +87,7 @@
             color: #ffffff; /* Biały tekst */
         }
 
+        /* Zakładki */
         .tabs {
             display: flex;
             justify-content: center;
@@ -101,6 +109,7 @@
             background-color: #5b6eae; /* Ciemniejszy odcień niebieskiego */
         }
 
+        /* Zawartość zakładki */
         .tab-content {
             display: none;
             background-color: #333333; /* Ciemny szary */
@@ -114,6 +123,7 @@
             display: block;
         }
 
+        /* Stopka */
         footer {
             background-color: #2c2c2c; /* Ciemny szary */
             text-align: center;
@@ -130,31 +140,41 @@
             font-size: 0.9em;
         }
 
+        /* Zapytanie media dla urządzeń o szerokości do 768px */
         @media (max-width: 768px) {
+            /* Zmniejszenie rozmiaru czcionki dla nagłówka */
             header h1 {
-                font-size: 2em; /* Zmniejszenie rozmiaru czcionki dla nagłówka */
+                font-size: 2em;
             }
 
+            /* Zmniejszenie paddingu dla sekcji */
             .section {
                 padding: 15px;
             }
 
+            /* Zmniejszenie paddingu dla elementów tabów */
             .tabs li {
-                padding: 8px 16px; /* Zmniejszenie paddingu dla elementów tabów */
+                padding: 8px 16px;
             }
 
+            /* Zmniejszenie paddingu dla przycisków */
             .button {
-                padding: 8px 16px; /* Zmniejszenie paddingu dla przycisków */
+                padding: 8px 16px;
+            }
+
+            /* Ukrycie stopki na urządzeniach mobilnych */
+            footer {
+                display: none;
             }
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body>
     <header>
         <h1>Black House</h1>
         <p></p>
+        <button id="switchVersion" class="button">Przełącz na wersję mobilną</button>
     </header>
     <div class="content">
         <ul class="tabs">
@@ -202,54 +222,30 @@
     </footer>
 
     <script>
-        async function loadAnnouncements() {
-            try {
-                const response = await fetch('ogloszenia.txt');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const text = await response.text();
-
-                // Zamienia \n na <br> w tekście
-                let formattedText = text.replace(/\n/g, '<br>');
-
-                // Zamienia <pogrubienie>...</pogrubienie> na <strong>...</strong>
-                formattedText = formattedText.replace(/<pogrubienie>(.*?)<\/pogrubienie>/gs, '<strong>$1</strong>');
-
-                document.getElementById('announcements').innerHTML = formattedText;
-            } catch (error) {
-                document.getElementById('announcements').textContent = 'Nie udało się załadować ogłoszeń: ' + error.message;
-                console.error('Fetch error:', error);
+        // Funkcja do przełączania wersji strony (desktop/mobilna)
+        function switchVersion() {
+            var url = window.location.href;
+            if (url.indexOf('?version=mobile') === -1) {
+                window.location = url + '?version=mobile';
+            } else {
+                window.location = url.replace('?version=mobile', '');
             }
         }
-        loadAnnouncements();
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const tabLinks = document.querySelectorAll('.tab-link');
-            const tabContents = document.querySelectorAll('.tab-content');
-
-            tabLinks.forEach(function (link) {
-                link.addEventListener('click', function () {
-                    const tabId = this.getAttribute('data-tab');
-
-                    tabContents.forEach(function (content) {
-                        if (content.id === tabId) {
-                            content.classList.add('active');
-                        } else {
-                            content.classList.remove('active');
-                        }
-                    });
-
-                    tabLinks.forEach(function (link) {
-                        if (link.getAttribute('data-tab') === tabId) {
-                            link.classList.add('active');
-                        } else {
-                            link.classList.remove('active');
-                        }
-                    });
-                });
-            });
+        // Obsługa przycisku przełączania wersji
+        document.getElementById('switchVersion').addEventListener('click', function () {
+            switchVersion();
         });
+
+        // Funkcja do sprawdzania, czy strona jest wyświetlana na urządzeniu mobilnym
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+
+        // Sprawdzenie, czy należy wyświetlić przycisk przełączania wersji
+        if (!isMobile()) {
+            document.getElementById('switchVersion').style.display = 'none';
+        }
     </script>
 </body>
 
