@@ -1,149 +1,109 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Black House - Discord</title>
+    <title>Discord Minecraft Server</title>
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #1e1e1e;
-            color: #ffffff;
-            margin: 0;
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+            list-style-type: none;
             padding: 0;
         }
-
-        header {
-            background-color: #2c2f33;
-            padding: 20px 0;
-            text-align: center;
-            border-bottom: 2px solid #7289da;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 3em;
-            color: #7289da;
-        }
-
-        header p {
-            font-size: 1.2em;
-        }
-
-        .content {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-
-        .section {
-            background-color: #23272a;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .section h2 {
-            color: #61dafb;
-            border-bottom: 2px solid #61dafb;
-            padding-bottom: 10px;
-        }
-
-        .section p {
-            line-height: 1.6;
-        }
-
-        .button {
-            display: inline-block;
-            background-color: #7289da;
-            color: #ffffff;
+        .tabs li {
             padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-            margin-top: 10px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px 5px 0 0;
+            cursor: pointer;
         }
-
-        .button:hover {
-            background-color: #5b6eae;
+        .tabs li.active {
+            background-color: #ccc;
         }
-
-        .announcements {
-            background-color: #2c2f33;
-            border-left: 5px solid #61dafb;
-            padding: 15px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-        }
-
-        footer {
-            background-color: #2c2f33;
-            text-align: center;
+        .content {
+            border: 1px solid #ccc;
             padding: 20px;
-            border-top: 2px solid #7289da;
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 0.9em;
-        }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2.5em;
-            }
-
-            .section {
-                padding: 15px;
-            }
+            width: 80%;
+            margin-top: -1px;
+            border-radius: 0 0 5px 5px;
         }
     </style>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-    <header>
-        <h1>Black House</h1>
-        <p>Twój ulubiony Discord!</p>
-    </header>
-    <div class="content">
-        <div class="section">
-            <h2>O nas</h2>
-            <p>Black House to społeczność graczy, którzy łączą się na naszym serwerze Discord, aby wspólnie grać, rozmawiać i bawić się.</p>
-        </div>
-        <div class="section">
-            <h2>Ogłoszenia</h2>
-            <div id="announcements" class="announcements">
-                Ładowanie ogłoszeń...
-            </div>
-        </div>
-        <div class="section">
-            <h2>Dołącz do nas na Discordzie</h2>
-            <p>Dołącz do naszej społeczności na Discordzie, aby być na bieżąco z wydarzeniami, znajdować nowych przyjaciół do gry i korzystać z różnych kanałów tematycznych.</p>
-            <a href="https://discord.gg/twoj-link" class="button">Dołącz do Discorda</a>
-        </div>
-        <footer>
-            <p>&copy; 2024 Black House. Wszelkie prawa zastrzeżone.</p>
-        </footer>
+    <h1>Discord Minecraft Server</h1>
+    <div class="container">
+        <ul class="tabs">
+            <li class="tab-link active" data-tab="tab-1">Home</li>
+            <li class="tab-link" data-tab="tab-2">Server Info</li>
+            <li class="tab-link" data-tab="tab-3">Rules</li>
+            <li class="tab-link" data-tab="tab-4">Downloads</li>
+        </ul>
+    </div>
+    <div id="tab-1" class="content active">
+        <h2>Welcome to Our Minecraft Discord!</h2>
+        <p>This is the home page of our Minecraft Discord server. Join us for exciting adventures!</p>
+    </div>
+    <div id="tab-2" class="content">
+        <h2>Server Information</h2>
+        <p>Here you can find all the information about our Minecraft server.</p>
+        <p>Server IP: <a href="minecraft://yourserverip">minecraft://yourserverip</a></p>
+    </div>
+    <div id="tab-3" class="content">
+        <h2>Rules</h2>
+        <p>These are the rules you need to follow when playing on our Minecraft server:</p>
+        <ul>
+            <li>Be respectful to others.</li>
+            <li>No griefing.</li>
+            <li>Have fun!</li>
+        </ul>
+    </div>
+    <div id="tab-4" class="content">
+        <h2>Downloads</h2>
+        <p>Download the necessary files for our Minecraft server:</p>
+        <ul>
+            <li><a href="https://example.com/download1.zip">Download 1</a></li>
+            <li><a href="https://example.com/download2.zip">Download 2</a></li>
+        </ul>
     </div>
 
     <script>
-        async function loadAnnouncements() {
-            try {
-                const response = await fetch('ogloszenia.txt');
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const text = await response.text();
-                const markdownText = marked(text);
-                document.getElementById('announcements').innerHTML = markdownText;
-            } catch (error) {
-                document.getElementById('announcements').innerHTML = 'Nie udało się załadować ogłoszeń: ' + error.message;
-                console.error('Fetch error:', error);
-            }
-        }
-        document.addEventListener('DOMContentLoaded', loadAnnouncements);
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.content');
+
+        tabLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                const tabId = this.getAttribute('data-tab');
+
+                tabContents.forEach(function(content) {
+                    if (content.id === tabId) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+
+                tabLinks.forEach(function(link) {
+                    if (link.getAttribute('data-tab') === tabId) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
