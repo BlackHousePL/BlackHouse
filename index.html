@@ -120,6 +120,9 @@
             padding: 20px;
             border-top: 2px solid #7289da;
             color: #ffffff;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
         }
 
         footer p {
@@ -147,14 +150,12 @@
     </header>
     <div class="content">
         <ul class="tabs">
-            <ul class="tabs">
-                <li class="tab-link active" data-tab="tab-1">Ogłoszenia</li>
-                <li class="tab-link" data-tab="tab-3">Discord</li>
-                <li class="tab-link" data-tab="tab-4">Minecraft</li>
-                <li class="tab-link" data-tab="tab-2">O nas</li>
-            </ul>
-
+            <li class="tab-link active" data-tab="tab-1">Ogłoszenia</li>
+            <li class="tab-link" data-tab="tab-3">Discord</li>
+            <li class="tab-link" data-tab="tab-4">Minecraft</li>
+            <li class="tab-link" data-tab="tab-2">O nas</li>
         </ul>
+
         <div id="tab-1" class="tab-content active">
             <div class="section">
                 <h2>Ogłoszenia</h2>
@@ -187,11 +188,10 @@
         </div>
 
     </div>
-    </div>
+
     <footer>
         <p>&copy; 2024 Black House. Wszelkie prawa zastrzeżone.</p>
     </footer>
-    </div>
 
     <script>
         async function loadAnnouncements() {
@@ -208,8 +208,6 @@
                 // Zamienia <pogrubienie>...</pogrubienie> na <strong>...</strong>
                 formattedText = formattedText.replace(/<pogrubienie>(.*?)<\/pogrubienie>/gs, '<strong>$1</strong>');
 
-                
-
                 document.getElementById('announcements').innerHTML = formattedText;
             } catch (error) {
                 document.getElementById('announcements').textContent = 'Nie udało się załadować ogłoszeń: ' + error.message;
@@ -217,10 +215,6 @@
             }
         }
         loadAnnouncements();
-
-
-
-
 
         document.addEventListener('DOMContentLoaded', function () {
             const tabLinks = document.querySelectorAll('.tab-link');
